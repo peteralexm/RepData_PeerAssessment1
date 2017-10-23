@@ -3,17 +3,15 @@ title: "Reproducible Research - Course Project 1"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
-```
+
 This report contains analysis of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
 1 Assignment
 ============
 
 R code:
-```{r}
 
+```r
 library(ggplot2)
 
 df <- read.csv("./activity.csv")
@@ -28,17 +26,14 @@ plot1 <- ggplot(Sum_steps, aes(steps))+geom_histogram()+
 
 median_steps <- median(Sum_steps$steps)
 mean_steps <- mean(Sum_steps$steps)
-
 ```
 A histogram of the total number of steps taken each day:
 
-```{r, echo=FALSE} 
-plot1
-```
+<img src="C:\Users\Петя\Documents\datasciencecoursera\C5Project\RepData_PeerAssessment1\PA1_template_files/figure-html/unnamed-chunk-2-1.png" width="672" />
   
-The mean of the total number of steps taken per day is `r mean_steps`.
+The mean of the total number of steps taken per day is 1.0766189\times 10^{4}.
 
-The median of the total number of steps taken per day is `r median_steps`.
+The median of the total number of steps taken per day is 10765.
 
 2 Assignment
 ============
@@ -46,27 +41,26 @@ The median of the total number of steps taken per day is `r median_steps`.
 R code:
 
 
-```{r}
+
+```r
 pattern <- aggregate(cbind(steps)~interval, data=df, FUN=mean)
 plot2 <-ggplot(pattern, aes(x=interval, y=steps))+geom_line()
 
 max_interval <- pattern$interval[which.max(pattern$steps)]
-
 ```
 
 A time-series plot of the average number of steps taken during each of the 5-minute intervals throughout the day:
-```{r, echo=FALSE}
-plot2
-```
+<img src="C:\Users\Петя\Documents\datasciencecoursera\C5Project\RepData_PeerAssessment1\PA1_template_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
-The maximum average number of steps is taken in the interval number `r max_interval`
+The maximum average number of steps is taken in the interval number 835
 
 3 Assignment
 ============
 
 R code:
 
-```{r}
+
+```r
 na_sum <- sum(is.na(df$steps))
 df$steps[is.na(df$steps)] <-pattern$steps[pattern$interval %in% df$interval[is.na(df$steps)]] 
 Sum_steps <- aggregate(cbind(steps)~date, data=df, FUN=sum)
@@ -82,29 +76,28 @@ median_steps_2 <- median(Sum_steps$steps)
 mean_steps_2 <- mean(Sum_steps$steps)
 ```
 
-The total number of missing values in the dataset is `r na_sum`.
+The total number of missing values in the dataset is 2304.
 
 The na values are replaced with the average values for the interval.
 
 A histogram of the total number of steps taken each day after filling na values:
 
-```{r, echo=FALSE} 
-plot3
-```
+<img src="C:\Users\Петя\Documents\datasciencecoursera\C5Project\RepData_PeerAssessment1\PA1_template_files/figure-html/unnamed-chunk-6-1.png" width="672" />
   
-The mean of the total number of steps taken per day after filling na values is `r mean_steps_2`.
+The mean of the total number of steps taken per day after filling na values is 1.0766189\times 10^{4}.
 
-The median of the total number of steps taken per day after filling na values is `r median_steps_2`.
+The median of the total number of steps taken per day after filling na values is 1.0766189\times 10^{4}.
 
 4 Assignment
 ============
 
 R Code:
 
-``` {r}
+
+```r
 df$weekday <- weekdays(as.Date(df$date, format="%Y-%m-%d"), 1)
-df$weekday[df$weekday=="��"|df$weekday=="��"|df$weekday=="��"|df$weekday=="��"|df$weekday=="��"] <- "weekday"
-df$weekday[df$weekday=="��"|df$weekday=="��"] <- "weekend"
+df$weekday[df$weekday=="Пн"|df$weekday=="Вт"|df$weekday=="Ср"|df$weekday=="Чт"|df$weekday=="Пт"] <- "weekday"
+df$weekday[df$weekday=="Сб"|df$weekday=="Вс"] <- "weekend"
 
 pattern2 <- aggregate(cbind(steps)~interval+weekday, data=df, FUN=mean)
 
@@ -112,6 +105,4 @@ plot4 <- ggplot(pattern2, aes(x=interval, y=steps))+geom_line()+facet_grid(weekd
 ```
 
 Plot showing the difference between workdays and weekends average steps pattern:
-```{r, echo=FALSE} 
-plot4
-```
+<img src="C:\Users\Петя\Documents\datasciencecoursera\C5Project\RepData_PeerAssessment1\PA1_template_files/figure-html/unnamed-chunk-8-1.png" width="672" />
