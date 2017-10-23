@@ -29,7 +29,7 @@ mean_steps <- mean(Sum_steps$steps)
 ```
 A histogram of the total number of steps taken each day:
 
-<img src="https://github.com/peteralexm/RepData_PeerAssessment1/tree/master/PA1_template_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="https://github.com/peteralexm/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-2-1.png" width="672" />
   
 The mean of the total number of steps taken per day is 1.0766189\times 10^{4}.
 
@@ -50,7 +50,7 @@ max_interval <- pattern$interval[which.max(pattern$steps)]
 ```
 
 A time-series plot of the average number of steps taken during each of the 5-minute intervals throughout the day:
-<img src="https://github.com/peteralexm/RepData_PeerAssessment1/tree/master/PA1_template_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="https://github.com/peteralexm/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 The maximum average number of steps is taken in the interval number 835
 
@@ -82,7 +82,7 @@ The na values are replaced with the average values for the interval.
 
 A histogram of the total number of steps taken each day after filling na values:
 
-<img src="https://github.com/peteralexm/RepData_PeerAssessment1/tree/master/PA1_template_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="https://github.com/peteralexm/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-6-1.png" width="672" />
   
 The mean of the total number of steps taken per day after filling na values is 1.0766189\times 10^{4}.
 
@@ -105,4 +105,4 @@ plot4 <- ggplot(pattern2, aes(x=interval, y=steps))+geom_line()+facet_grid(weekd
 ```
 
 Plot showing the difference between workdays and weekends average steps pattern:
-<img src="https://github.com/peteralexm/RepData_PeerAssessment1/tree/master/PA1_template_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="https://github.com/peteralexm/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-8-1.png" width="672" />
